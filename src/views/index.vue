@@ -48,53 +48,71 @@
                 <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
             </a-layout-header>
             <a-layout-content>
-                <a-row :gutter="16">
-                    <a-col :xs="2" :sm="4" :md="6" :lg="8" :xl="10">
-                        <a-card hoverable>
-                            <a-card-meta title="Card title" description="This is the description">
-                                <template #avatar>
-                                    <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                </template>
-                            </a-card-meta>
-                        </a-card>
-                    </a-col>
-                    <a-col :xs="2" :sm="4" :md="6" :lg="8" :xl="10">
-                        <a-card hoverable>
-                            <a-card-meta title="Card title" description="This is the description">
-                                <template #avatar>
-                                    <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                </template>
-                            </a-card-meta>
-                        </a-card>
-                    </a-col>
-                    <a-col :xs="2" :sm="4" :md="6" :lg="8" :xl="10">
-                        <a-card hoverable>
-                            <a-card-meta title="Card title" description="This is the description">
-                                <template #avatar>
-                                    <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                </template>
-                            </a-card-meta>
-                        </a-card>
-                    </a-col>
-                    <a-col :xs="2" :sm="4" :md="6" :lg="8" :xl="10">
-                        <a-card hoverable>
-                            <a-card-meta title="Card title" description="This is the description">
-                                <template #avatar>
-                                    <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                </template>
-                            </a-card-meta>
-                        </a-card>
-                    </a-col>
-                    <a-col :xs="2" :sm="4" :md="6" :lg="8" :xl="10">
-                        <a-card hoverable>
-                            <a-card-meta title="Card title" description="This is the description">
-                                <template #avatar>
-                                    <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                </template>
-                            </a-card-meta>
-                        </a-card>
-                    </a-col>
-                </a-row>
+                <a-typography>
+                    <a-typography-title :level="3">Introduction</a-typography-title>
+                    <a-row :gutter="48">
+                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
+                            <a-card hoverable>
+                                <a-card-meta
+                                    title="Card title"
+                                    description="This is the description"
+                                >
+                                    <template #avatar>
+                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
+                                    </template>
+                                </a-card-meta>
+                            </a-card>
+                        </a-col>
+                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
+                            <a-card hoverable>
+                                <a-card-meta
+                                    title="Card title"
+                                    description="This is the description"
+                                >
+                                    <template #avatar>
+                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
+                                    </template>
+                                </a-card-meta>
+                            </a-card>
+                        </a-col>
+                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
+                            <a-card hoverable>
+                                <a-card-meta
+                                    title="Card title"
+                                    description="This is the description"
+                                >
+                                    <template #avatar>
+                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
+                                    </template>
+                                </a-card-meta>
+                            </a-card>
+                        </a-col>
+                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
+                            <a-card hoverable>
+                                <a-card-meta
+                                    title="Card title"
+                                    description="This is the description"
+                                >
+                                    <template #avatar>
+                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
+                                    </template>
+                                </a-card-meta>
+                            </a-card>
+                        </a-col>
+                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
+                            <a-card hoverable>
+                                <a-card-meta
+                                    title="Card title"
+                                    description="This is the description"
+                                >
+                                    <template #avatar>
+                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
+                                    </template>
+                                </a-card-meta>
+                            </a-card>
+                        </a-col>
+                    </a-row>
+                </a-typography>
             </a-layout-content>
         </a-layout>
     </a-layout>
