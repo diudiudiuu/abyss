@@ -9,7 +9,8 @@ import { defineStore } from 'pinia'
 export const useStorageStore = defineStore({
   id: 'storage',
   state: () => ({
-
+    'selected_name': '常用推荐',
+    'open_keys': '常用推荐'
   }),
   getters: {
   },

@@ -1560,7 +1560,6 @@ export const useAbyssStore = defineStore({
                 ]
             }
         ],
-        'selected_name': "常用推荐"
     }),
     getters: {
     },

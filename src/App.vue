@@ -34,3 +34,23 @@ const reload = () => {
 }
 provide('reload', reload)
 </script>
+
+<style lang="less">
+/* 添加圆角边框 */
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5px;
+}
+
+/* 添加阴影效果 */
+::-webkit-scrollbar-thumb {
+    background-color: #1890ff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 修改滚动条轨道背景颜色 */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+</style>

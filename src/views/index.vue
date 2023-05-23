@@ -1,13 +1,13 @@
 <template>
     <a-layout class="abyss">
-        <a-layout-sider :width="220" class="sider">
+        <a-layout-sider class="sider">
             <div class="logo" />
-            <a-menu v-model:selectedKeys="selected_name" v-model:openKeys="openKeys" mode="inline">
+            <a-menu v-model:selectedKeys="selected_name" v-model:openKeys="open_keys" mode="inline">
                 <template v-for="item in abyss.stack" :key="item.name">
                     <a-menu-item
                         v-if="!item.children"
                         :key="item.name"
-                        @click="handleMenu(item.name)"
+                        @click="handleMenu(item.name, item.name)"
                     >{{item.name}}</a-menu-item>
 
                     <a-sub-menu v-if="item.children" :key="item.name">
@@ -15,7 +15,7 @@
                         <a-menu-item
                             v-for="sub_item in item.children"
                             :key="sub_item.name"
-                            @click="handleMenu(sub_item.name)"
+                            @click="handleMenu(sub_item.name, item.name)"
                         >{{sub_item.name}}</a-menu-item>
                     </a-sub-menu>
                 </template>
@@ -32,8 +32,9 @@
                                 :id="item.name"
                                 :level="3"
                             >{{item.name}}</a-typography-title>
-                            <a-row>
+                            <a-row class="item-row">
                                 <a-col
+                                    class="item-col"
                                     v-for="site in item.web"
                                     :key="site.title"
                                     :xs="24"
@@ -42,7 +43,7 @@
                                     :lg="6"
                                     :xl="4"
                                 >
-                                    <a-card hoverable>
+                                    <a-card hoverable @click="handleHerf(site.url)">
                                         <a-card-meta :title="site.title" :description="site.desc">
                                             <template #avatar>
                                                 <a-avatar :src="getLogoUrl(site.logo)" />
@@ -62,8 +63,9 @@
                                     :id="sub_item.name"
                                     :level="3"
                                 >{{sub_item.name}}</a-typography-title>
-                                <a-row>
+                                <a-row class="item-row">
                                     <a-col
+                                        class="item-col"
                                         v-for="site in sub_item.web"
                                         :key="site.title"
                                         :xs="24"
@@ -72,7 +74,7 @@
                                         :lg="6"
                                         :xl="4"
                                     >
-                                        <a-card hoverable>
+                                        <a-card hoverable @click="handleHerf(site.url)">
                                             <a-card-meta
                                                 :title="site.title"
                                                 :description="site.desc"
@@ -89,24 +91,30 @@
                     </template>
                 </template>
             </a-layout-content>
-
-            <div id="home">这里</div>
         </a-layout>
     </a-layout>
 </template>
 
 <script setup >
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
 import { useAbyssStore } from '@/pinia/abyss'
+import { useStorageStore } from '@/pinia/storage'
 
 const abyss = useAbyssStore()
+const storage = useStorageStore()
 
-const selected_name = ref([abyss.selected_name])
-const openKeys = ref([abyss.selected_name])
+const selected_name = ref([])
+const open_keys = ref([])
 
 // click menu
-const handleMenu = (name) => {
+const handleMenu = (name, pname) => {
+    storage.selected_name = name
+    storage.open_keys = pname
+
+    selected_name.value = [name]
+    open_keys.value = [pname]
+
     // 跳转到指定name的锚点
     const el = document.getElementById(name)
     if (el) {
@@ -117,37 +125,56 @@ const handleMenu = (name) => {
         })
     }
 }
+onMounted(async () => {
+    await nextTick()
+    handleMenu(storage.selected_name, storage.open_keys)
+})
 
 // get logo url
 const getLogoUrl = (logo) => {
     const url = new URL(`../${logo}`, import.meta.url)
-    return url
+    // 转为string
+    return url.toString()
+}
+
+// go url
+const handleHerf = (url) => {
+    window.open(url, '_blank')
 }
 </script>
 <style lang="less" scoped>
 .abyss {
     .sider {
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
         position: fixed;
+        background-color: #fff;
         left: 0;
         top: 0;
         bottom: 0;
     }
 
     .contain {
-        margin-left: 220px;
+        margin-left: 200px;
         .header {
             position: fixed;
             z-index: 1;
             width: 100%;
+            background-color: #fff;
         }
 
         .content {
             margin-top: 64px;
+            padding: 10px;
             .site {
                 .title {
                     scroll-margin: 64px;
+                }
+                .item-row {
                     padding: 10px;
+                    .item-col {
+                        padding: 5px;
+                    }
                 }
             }
         }
