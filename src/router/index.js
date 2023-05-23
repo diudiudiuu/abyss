@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useVariableStore } from '@/pinia/variable'
-
 const routes = [
 	{
 		path: "/",
@@ -11,28 +9,14 @@ const routes = [
 		component: () => import(/* webpackChunkName: "index" */ "@/views/index.vue")
 	},
 	{
-		path: '/404',
-		name: '404',
-		meta: {
-			auth: false,
-		},
-		component: () => import(/* webpackChunkName: "404" */ '@/views/404.vue')
-	},
-	{
 		path: '/:pathMatch(.*)',
-		redirect: '/404'
+		redirect: '/'
 	}
 ];
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes,
-	scrollBehavior(to, from, savedPosition) {
-		const variable = useVariableStore()
-		if (variable.scrollbar) {
-			variable.scrollbar.scrollTo(0, 0)
-		}
-	}
+	routes
 })
 
 router.beforeEach(async (to, from, next) => {

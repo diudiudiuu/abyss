@@ -1,156 +1,149 @@
 <template>
-    <a-layout>
-        <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+    <a-layout class="abyss">
+        <a-layout-sider :width="220" class="sider">
             <div class="logo" />
-            <a-menu v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" mode="inline">
-                <a-sub-menu key="sub1">
-                    <template #title>
-                        <span>
-                            <user-outlined />subnav 1
-                        </span>
-                    </template>
-                    <a-menu-item key="1">option1</a-menu-item>
-                    <a-menu-item key="2">option2</a-menu-item>
-                    <a-menu-item key="3">option3</a-menu-item>
-                    <a-menu-item key="4">option4</a-menu-item>
-                </a-sub-menu>
-                <a-sub-menu key="sub2">
-                    <template #title>
-                        <span>
-                            <laptop-outlined />subnav 2
-                        </span>
-                    </template>
-                    <a-menu-item key="5">option5</a-menu-item>
-                    <a-menu-item key="6">option6</a-menu-item>
-                    <a-menu-item key="7">option7</a-menu-item>
-                    <a-menu-item key="8">option8</a-menu-item>
-                </a-sub-menu>
-                <a-sub-menu key="sub3">
-                    <template #title>
-                        <span>
-                            <notification-outlined />subnav 3
-                        </span>
-                    </template>
-                    <a-menu-item key="9">option9</a-menu-item>
-                    <a-menu-item key="10">option10</a-menu-item>
-                    <a-menu-item key="11">option11</a-menu-item>
-                    <a-menu-item key="12">option12</a-menu-item>
-                </a-sub-menu>
+            <a-menu v-model:selectedKeys="selected_name" v-model:openKeys="openKeys" mode="inline">
+                <template v-for="item in abyss.stack" :key="item.name">
+                    <a-menu-item
+                        v-if="!item.children"
+                        :key="item.name"
+                        @click="hanldMenu(item.name)"
+                    >{{item.name}}</a-menu-item>
+
+                    <a-sub-menu v-if="item.children" :key="item.name">
+                        <template #title>{{item.name}}</template>
+                        <a-menu-item
+                            v-for="sub_item in item.children"
+                            :key="sub_item.name"
+                            @click="hanldMenu(sub_item.name)"
+                        >{{sub_item.name}}</a-menu-item>
+                    </a-sub-menu>
+                </template>
             </a-menu>
         </a-layout-sider>
-        <a-layout>
-            <a-layout-header theme="light">
-                <menu-unfold-outlined
-                    v-if="collapsed"
-                    class="trigger"
-                    @click="() => (collapsed = !collapsed)"
-                />
-                <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
-            </a-layout-header>
-            <a-layout-content>
-                <a-typography>
-                    <a-typography-title :level="3">Introduction</a-typography-title>
-                    <a-row :gutter="48">
-                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
-                            <a-card hoverable>
-                                <a-card-meta
-                                    title="Card title"
-                                    description="This is the description"
+        <a-layout class="contain">
+            <a-layout-header class="header"></a-layout-header>
+            <a-layout-content class="content">
+                <template v-for="item in abyss.stack" :key="item.name">
+                    <template v-if="!item.children && item.web">
+                        <a-typography class="site">
+                            <a-typography-title
+                                class="title"
+                                :id="item.name"
+                                :level="3"
+                            >{{item.name}}</a-typography-title>
+                            <a-row>
+                                <a-col
+                                    v-for="site in item.web"
+                                    :key="site.title"
+                                    :xs="24"
+                                    :sm="24"
+                                    :md="24"
+                                    :lg="6"
+                                    :xl="4"
                                 >
-                                    <template #avatar>
-                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                    </template>
-                                </a-card-meta>
-                            </a-card>
-                        </a-col>
-                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
-                            <a-card hoverable>
-                                <a-card-meta
-                                    title="Card title"
-                                    description="This is the description"
-                                >
-                                    <template #avatar>
-                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                    </template>
-                                </a-card-meta>
-                            </a-card>
-                        </a-col>
-                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
-                            <a-card hoverable>
-                                <a-card-meta
-                                    title="Card title"
-                                    description="This is the description"
-                                >
-                                    <template #avatar>
-                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                    </template>
-                                </a-card-meta>
-                            </a-card>
-                        </a-col>
-                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
-                            <a-card hoverable>
-                                <a-card-meta
-                                    title="Card title"
-                                    description="This is the description"
-                                >
-                                    <template #avatar>
-                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                    </template>
-                                </a-card-meta>
-                            </a-card>
-                        </a-col>
-                        <a-col :xs="24" :sm="16" :md="16" :lg="12" :xl="12" :xxl="12">
-                            <a-card hoverable>
-                                <a-card-meta
-                                    title="Card title"
-                                    description="This is the description"
-                                >
-                                    <template #avatar>
-                                        <a-avatar src="https://joeschmoe.io/api/v1/random" />
-                                    </template>
-                                </a-card-meta>
-                            </a-card>
-                        </a-col>
-                    </a-row>
-                </a-typography>
+                                    <a-card hoverable>
+                                        <a-card-meta :title="site.title" :description="site.desc">
+                                            <template #avatar>
+                                                <a-avatar :src="site.logo" />
+                                            </template>
+                                        </a-card-meta>
+                                    </a-card>
+                                </a-col>
+                            </a-row>
+                        </a-typography>
+                    </template>
+
+                    <template v-if="item.children">
+                        <template v-for="sub_item in item.children" :key="sub_item.name">
+                            <a-typography class="site" v-if="sub_item.web">
+                                <a-typography-title
+                                    class="title"
+                                    :id="sub_item.name"
+                                    :level="3"
+                                >{{sub_item.name}}</a-typography-title>
+                                <a-row>
+                                    <a-col
+                                        v-for="site in sub_item.web"
+                                        :key="site.title"
+                                        :xs="24"
+                                        :sm="24"
+                                        :md="24"
+                                        :lg="6"
+                                        :xl="4"
+                                    >
+                                        <a-card hoverable>
+                                            <a-card-meta
+                                                :title="site.title"
+                                                :description="site.desc"
+                                            >
+                                                <template #avatar>
+                                                    <a-avatar :src="site.logo" />
+                                                </template>
+                                            </a-card-meta>
+                                        </a-card>
+                                    </a-col>
+                                </a-row>
+                            </a-typography>
+                        </template>
+                    </template>
+                </template>
             </a-layout-content>
+
+            <div id="home">这里</div>
         </a-layout>
     </a-layout>
 </template>
 
 <script setup >
-import { ref, reactive, inject } from 'vue'
-import { useRouter } from 'vue-router'
-import {
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-} from '@ant-design/icons-vue'
-// import { useI18n } from 'vue-i18n'
+import { ref } from 'vue'
 
-import { useConstantStore } from '@/pinia/constant'
-import { useVariableStore } from '@/pinia/variable'
-import { useStorageStore } from '@/pinia/storage'
+import { useAbyssStore } from '@/pinia/abyss'
 
-const constant = useConstantStore()
-const variable = useVariableStore()
-const storage = useStorageStore()
+const abyss = useAbyssStore()
 
-const router = useRouter()
-const setMetaTitle = inject('setMetaTitle')
-const reload = inject('reload')
+const selected_name = ref([abyss.selected_name])
+const openKeys = ref([abyss.selected_name])
 
-// const { t } = useI18n()
-
-// 设置 title
-// setMetaTitle(t('book.list.title'))
-
-const selectedKeys1 = ref(['2'])
-const selectedKeys2 = ref(['1'])
-const collapsed = ref(false)
-const openKeys = ref(['sub1'])
+const hanldMenu = (name) => {
+    // 跳转到指定name的锚点
+    const el = document.getElementById(name)
+    if (el) {
+        el.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'center',
+        })
+    }
+}
 </script>
 <style lang="less" scoped>
+.abyss {
+    .sider {
+        overflow: auto;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .contain {
+        margin-left: 220px;
+        .header {
+            position: fixed;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .content {
+            margin-top: 64px;
+            .site {
+                .title {
+                    scroll-margin: 64px;
+                }
+            }
+        }
+    }
+}
 </style>
