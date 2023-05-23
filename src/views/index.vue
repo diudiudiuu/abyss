@@ -1,7 +1,8 @@
 <template>
     <a-layout class="abyss">
         <a-layout-sider class="sider">
-            <div class="logo" />
+            <!-- <a-row :xs="0" :sm="0" :md="24" :lg="12" :xl="6"> -->
+            <div class="logo"></div>
             <a-menu v-model:selectedKeys="selected_name" v-model:openKeys="open_keys" mode="inline">
                 <template v-for="item in abyss.stack" :key="item.name">
                     <a-menu-item
@@ -20,6 +21,7 @@
                     </a-sub-menu>
                 </template>
             </a-menu>
+            <!-- </a-row> -->
         </a-layout-sider>
         <a-layout class="contain">
             <a-layout-header class="header"></a-layout-header>
@@ -40,8 +42,8 @@
                                     :xs="24"
                                     :sm="24"
                                     :md="24"
-                                    :lg="6"
-                                    :xl="4"
+                                    :lg="12"
+                                    :xl="6"
                                 >
                                     <a-card hoverable @click="handleHerf(site.url)">
                                         <a-card-meta :title="site.title" :description="site.desc">
@@ -71,8 +73,8 @@
                                         :xs="24"
                                         :sm="24"
                                         :md="24"
-                                        :lg="6"
-                                        :xl="4"
+                                        :lg="12"
+                                        :xl="6"
                                     >
                                         <a-card hoverable @click="handleHerf(site.url)">
                                             <a-card-meta
@@ -92,6 +94,8 @@
                 </template>
             </a-layout-content>
         </a-layout>
+
+        <a-back-top />
     </a-layout>
 </template>
 
