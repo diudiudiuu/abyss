@@ -7,7 +7,7 @@
                     <a-menu-item
                         v-if="!item.children"
                         :key="item.name"
-                        @click="hanldMenu(item.name)"
+                        @click="handleMenu(item.name)"
                     >{{item.name}}</a-menu-item>
 
                     <a-sub-menu v-if="item.children" :key="item.name">
@@ -15,7 +15,7 @@
                         <a-menu-item
                             v-for="sub_item in item.children"
                             :key="sub_item.name"
-                            @click="hanldMenu(sub_item.name)"
+                            @click="handleMenu(sub_item.name)"
                         >{{sub_item.name}}</a-menu-item>
                     </a-sub-menu>
                 </template>
@@ -45,7 +45,7 @@
                                     <a-card hoverable>
                                         <a-card-meta :title="site.title" :description="site.desc">
                                             <template #avatar>
-                                                <a-avatar :src="site.logo" />
+                                                <a-avatar :src="getLogoUrl(site.logo)" />
                                             </template>
                                         </a-card-meta>
                                     </a-card>
@@ -78,7 +78,7 @@
                                                 :description="site.desc"
                                             >
                                                 <template #avatar>
-                                                    <a-avatar :src="site.logo" />
+                                                    <a-avatar :src="getLogoUrl(site.logo)" />
                                                 </template>
                                             </a-card-meta>
                                         </a-card>
@@ -105,7 +105,8 @@ const abyss = useAbyssStore()
 const selected_name = ref([abyss.selected_name])
 const openKeys = ref([abyss.selected_name])
 
-const hanldMenu = (name) => {
+// click menu
+const handleMenu = (name) => {
     // 跳转到指定name的锚点
     const el = document.getElementById(name)
     if (el) {
@@ -116,12 +117,17 @@ const hanldMenu = (name) => {
         })
     }
 }
+
+// get logo url
+const getLogoUrl = (logo) => {
+    const url = new URL(`../${logo}`, import.meta.url)
+    return url
+}
 </script>
 <style lang="less" scoped>
 .abyss {
     .sider {
         overflow: auto;
-        height: 100vh;
         position: fixed;
         left: 0;
         top: 0;
@@ -141,6 +147,7 @@ const hanldMenu = (name) => {
             .site {
                 .title {
                     scroll-margin: 64px;
+                    padding: 10px;
                 }
             }
         }
