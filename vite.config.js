@@ -29,7 +29,7 @@ export default defineConfig(({ command, mode }) => {
     },
     build: {
       target: 'modules',
-      outDir: `front`,
+      outDir: `docs`,
       assetsDir: 'assets',
       minify: 'terser', // 混淆器
       sourcemap: false,
