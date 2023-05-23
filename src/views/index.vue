@@ -1,6 +1,6 @@
 <template>
     <a-layout class="abyss">
-        <a-layout-sider class="sider" :width="0">
+        <a-layout-sider class="sider" :width="200">
             <!-- <a-row :xs="0" :sm="0" :md="24" :lg="12" :xl="6"> -->
             <div class="logo"></div>
             <a-menu v-model:selectedKeys="selected_name" v-model:openKeys="open_keys" mode="inline">
