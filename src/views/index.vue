@@ -1,8 +1,8 @@
 <template>
     <a-layout class="abyss">
         <a-row type="flex" justify="space-around">
-            <a-col flex="255px" :xs="0" :sm="24" :md="24" :lg="24" :xl="24">
-                <a-layout-sider class="sider" :width="255">
+            <a-col flex="200px" :xs="0" :sm="24" :md="24" :lg="24" :xl="24">
+                <a-layout-sider class="sider" :width="200">
                     <a class="logo" href="javascript::void(0)">
                         <a-avatar :src="logo" :size="50" />
                         <span class="project-name">Abyss Diuu</span>
@@ -308,6 +308,10 @@ const handleTargetGithub = () => {
 
     .drawer {
         padding: 0;
+
+        ::v-deep .ant-drawer-body {
+            padding: 0;
+        }
     }
 }
 </style>
