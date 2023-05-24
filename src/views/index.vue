@@ -1,8 +1,8 @@
 <template>
     <a-layout class="abyss">
         <a-row type="flex" justify="space-around">
-            <a-col flex="200px" :xs="24">
-                <a-layout-sider class="sider" :width="200">
+            <a-col flex="255px" :xs="0" :sm="24" :md="24" :lg="24" :xl="24">
+                <a-layout-sider class="sider" :width="255">
                     <a class="logo" href="javascript::void(0)">
                         <a-avatar :src="logo" :size="50" />
                         <span class="project-name">Abyss Diuu</span>
@@ -36,7 +36,7 @@
                     <a-layout-header class="header">
                         <a-row type="flex" justify="space-between">
                             <!-- 菜单按钮 -->
-                            <a-col flex="200px">
+                            <a-col flex="100px">
                                 <unordered-list-outlined
                                     v-if="!show_menu"
                                     class="icon"
@@ -45,7 +45,7 @@
                                 <more-outlined v-else class="icon" @click="handleShowMenu" />
                             </a-col>
                             <!-- 操作 -->
-                            <a-col flex="1">
+                            <a-col flex="1" class="header-menu">
                                 <reload-outlined class="icon" @click="handleReload" :spin="spin" />
                                 <github-outlined class="icon" @click="handleTargetGithub" />
                             </a-col>
@@ -128,6 +128,40 @@
             </a-col>
         </a-row>
         <a-back-top />
+
+        <a-drawer
+            placement="left"
+            :closable="true"
+            :visible="show_menu"
+            width="200px"
+            class="drawer"
+            @close="handleShowMenu"
+        >
+            <a-layout-sider class="sider" width="100%">
+                <a-menu
+                    v-model:selectedKeys="selected_name"
+                    v-model:openKeys="open_keys"
+                    mode="inline"
+                >
+                    <template v-for="item in abyss.stack" :key="item.name">
+                        <a-menu-item
+                            v-if="!item.children"
+                            :key="item.name"
+                            @click="handleMenu(item.name, item.name)"
+                        >{{item.name}}</a-menu-item>
+
+                        <a-sub-menu v-if="item.children" :key="item.name">
+                            <template #title>{{item.name}}</template>
+                            <a-menu-item
+                                v-for="sub_item in item.children"
+                                :key="sub_item.name"
+                                @click="handleMenu(sub_item.name, item.name)"
+                            >{{sub_item.name}}</a-menu-item>
+                        </a-sub-menu>
+                    </template>
+                </a-menu>
+            </a-layout-sider>
+        </a-drawer>
     </a-layout>
 </template>
 
@@ -161,6 +195,7 @@ const handleMenu = (name, pname) => {
     selected_name.value = [name]
     open_keys.value = [pname]
 
+    show_menu.value = false
     // 跳转到指定name的锚点
     const el = document.getElementById(name)
     if (el) {
@@ -212,6 +247,7 @@ const handleTargetGithub = () => {
         overflow-x: hidden;
         overflow-y: auto;
         position: fixed;
+        z-index: 2;
         background-color: #fff;
         left: 0;
         top: 0;
@@ -233,15 +269,22 @@ const handleTargetGithub = () => {
     }
 
     .contain {
+        width: 100%;
         .header {
             position: fixed;
             z-index: 1;
+            left: 0;
             width: 100%;
             background-color: #fff;
             padding: 0 20px;
-
             .icon {
                 font-size: 22px;
+            }
+            .header-menu {
+                text-align: right;
+                .icon {
+                    margin-right: 10px;
+                }
             }
         }
 
@@ -260,6 +303,10 @@ const handleTargetGithub = () => {
                 }
             }
         }
+    }
+
+    .drawer {
+        padding: 0;
     }
 }
 </style>
