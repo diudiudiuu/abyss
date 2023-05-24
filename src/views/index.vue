@@ -72,14 +72,17 @@
                                             :lg="12"
                                             :xl="6"
                                         >
-                                            <a-card hoverable @click="handleHerf(site.url)">
-                                                <a-card-meta
-                                                    :title="site.title"
-                                                    :description="site.desc"
-                                                >
+                                            <a-card
+                                                hoverable
+                                                @click="handleHerf(site.url)"
+                                                size="small"
+                                            >
+                                                <a-card-meta :title="site.title">
                                                     <template #avatar>
                                                         <a-avatar :src="getLogoUrl(site.logo)" />
                                                     </template>
+
+                                                    <template #description>{{site.desc}}</template>
                                                 </a-card-meta>
                                             </a-card>
                                         </a-col>
@@ -107,14 +110,16 @@
                                                 :lg="12"
                                                 :xl="6"
                                             >
-                                                <a-card hoverable @click="handleHerf(site.url)">
-                                                    <a-card-meta
-                                                        :title="site.title"
-                                                        :description="site.desc"
-                                                    >
+                                                <a-card
+                                                    hoverable
+                                                    @click="handleHerf(site.url)"
+                                                    size="small"
+                                                >
+                                                    <a-card-meta :title="site.title">
                                                         <template #avatar>
                                                             <a-avatar :src="getLogoUrl(site.logo)" />
                                                         </template>
+                                                        <template #description>{{site.desc}}</template>
                                                     </a-card-meta>
                                                 </a-card>
                                             </a-col>
@@ -130,6 +135,7 @@
         <a-back-top />
 
         <a-drawer
+            title
             placement="left"
             :closable="true"
             :visible="show_menu"
