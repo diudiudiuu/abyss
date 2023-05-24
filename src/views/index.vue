@@ -40,6 +40,7 @@
                                         :id="item.name"
                                         :level="3"
                                     >{{item.name}}</a-typography-title>
+                                    <a-divider></a-divider>
                                     <a-row class="item-row">
                                         <a-col
                                             class="item-col"
@@ -74,6 +75,7 @@
                                             :id="sub_item.name"
                                             :level="3"
                                         >{{sub_item.name}}</a-typography-title>
+                                        <a-divider></a-divider>
                                         <a-row class="item-row">
                                             <a-col
                                                 class="item-col"
