@@ -292,6 +292,7 @@ const handleTargetGithub = () => {
             margin-top: 64px;
             padding: 10px;
             .site {
+                padding-bottom: 30px;
                 .title {
                     scroll-margin: 64px;
                 }
