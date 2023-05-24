@@ -8,7 +8,7 @@ import { useStorageStore } from '@/pinia/storage'
 
 const storage = useStorageStore()
 onMounted(() => {
-    document.title = 'Abyss'
+    document.title = 'Abyss Diuu'
 })
 const setMetaTitle = (title) => {
     document.title = title

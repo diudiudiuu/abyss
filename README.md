@@ -1,6 +1,6 @@
-# Abyss
+# Abyss Diuu
 
-网站收集导航,使用vite + vue + antd
+网站收集导航,使用Vite + Vue + Ant Design Vue + Pinia
 
 <!-- PROJECT SHIELDS -->
 

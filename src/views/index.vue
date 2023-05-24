@@ -1,9 +1,12 @@
 <template>
     <a-layout class="abyss">
         <a-row type="flex" justify="space-around">
-            <a-col flex="200px">
+            <a-col flex="200px" :xs="24">
                 <a-layout-sider class="sider" :width="200">
-                    <div class="logo"></div>
+                    <a class="logo" href="javascript::void(0)">
+                        <a-avatar :src="logo" :size="50" />
+                        <span class="project-name">Abyss Diuu</span>
+                    </a>
                     <a-menu
                         v-model:selectedKeys="selected_name"
                         v-model:openKeys="open_keys"
@@ -30,7 +33,24 @@
             </a-col>
             <a-col flex="1">
                 <a-layout class="contain">
-                    <a-layout-header class="header"></a-layout-header>
+                    <a-layout-header class="header">
+                        <a-row type="flex" justify="space-between">
+                            <!-- 菜单按钮 -->
+                            <a-col flex="200px">
+                                <unordered-list-outlined
+                                    v-if="!show_menu"
+                                    class="icon"
+                                    @click="handleShowMenu"
+                                />
+                                <more-outlined v-else class="icon" @click="handleShowMenu" />
+                            </a-col>
+                            <!-- 操作 -->
+                            <a-col flex="1">
+                                <reload-outlined class="icon" @click="handleReload" :spin="spin" />
+                                <github-outlined class="icon" @click="handleTargetGithub" />
+                            </a-col>
+                        </a-row>
+                    </a-layout-header>
                     <a-layout-content class="content">
                         <template v-for="item in abyss.stack" :key="item.name">
                             <template v-if="!item.children && item.web">
@@ -112,13 +132,23 @@
 </template>
 
 <script setup >
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, inject } from 'vue'
+import {
+    UnorderedListOutlined,
+    MoreOutlined,
+    ReloadOutlined,
+    GithubOutlined,
+} from '@ant-design/icons-vue'
+
+import logo from '@/assets/logo.png'
 
 import { useAbyssStore } from '@/pinia/abyss'
 import { useStorageStore } from '@/pinia/storage'
 
 const abyss = useAbyssStore()
 const storage = useStorageStore()
+
+const reload = inject('reload')
 
 const selected_name = ref([])
 const open_keys = ref([])
@@ -157,6 +187,24 @@ const getLogoUrl = (logo) => {
 const handleHerf = (url) => {
     window.open(url, '_blank')
 }
+
+const show_menu = ref(false)
+const handleShowMenu = () => {
+    show_menu.value = !show_menu.value
+}
+
+const spin = ref(false)
+const handleReload = () => {
+    spin.value = true
+    setTimeout(() => {
+        spin.value = false
+        reload()
+    }, 1000)
+}
+
+const handleTargetGithub = () => {
+    window.open('https://github.com/diudiudiuu/abyss', '_blank')
+}
 </script>
 <style lang="less" scoped>
 .abyss {
@@ -168,6 +216,20 @@ const handleHerf = (url) => {
         left: 0;
         top: 0;
         bottom: 0;
+        .logo {
+            line-height: 64px;
+            text-align: center;
+
+            padding-left: 24px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .project-name {
+                margin-left: 10px;
+                color: #000000d9;
+                font-size: 20px;
+            }
+        }
     }
 
     .contain {
@@ -176,6 +238,11 @@ const handleHerf = (url) => {
             z-index: 1;
             width: 100%;
             background-color: #fff;
+            padding: 0 20px;
+
+            .icon {
+                font-size: 22px;
+            }
         }
 
         .content {
