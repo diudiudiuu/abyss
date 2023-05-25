@@ -289,7 +289,8 @@ const handleTargetGithub = () => {
             .header-menu {
                 text-align: right;
                 .icon {
-                    margin-right: 10px;
+                    margin-right: 15px;
+                    font-size: 18px;
                 }
             }
         }
