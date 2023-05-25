@@ -135,7 +135,7 @@
         <a-back-top />
 
         <a-drawer
-            title
+            title="Abyss Diuu"
             placement="left"
             :closable="true"
             :visible="show_menu"
@@ -309,14 +309,6 @@ const handleTargetGithub = () => {
                     }
                 }
             }
-        }
-    }
-
-    .drawer {
-        padding: 0;
-
-        ::v-deep .ant-drawer-body {
-            padding: 0;
         }
     }
 }
