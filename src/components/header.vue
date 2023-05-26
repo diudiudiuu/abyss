@@ -16,12 +16,20 @@
     </a-layout>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import {
     UnorderedListOutlined,
     ReloadOutlined,
     GithubOutlined,
 } from '@ant-design/icons-vue'
+
+import { abyssPinia } from '@/pinia/abyss'
+import { persistPinia } from '@/pinia/persist'
+
+const abyss = abyssPinia()
+const persist = persistPinia()
+
+const reload = inject('reload')
 
 const handleShowMenu = () => {
     show_menu.value = !show_menu.value
