@@ -86,7 +86,7 @@ nextTick(async () => {
     await abyss.get_stack_list()
     setTimeout(() => {
         abyss.spining = false
-        tools.handleScroll(persist.selected_name, persist.open_keys)
+        tools.handleScroll(persist.selected_name[0])
     }, 600)
 })
 

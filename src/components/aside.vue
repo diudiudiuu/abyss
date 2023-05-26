@@ -5,13 +5,15 @@
                 <a-avatar :src="logo" :size="50" />
                 <span class="project-name">Abyss Diuu</span>
             </a>
-            <a-menu mode="inline">
+            <a-menu
+                mode="inline"
+                :selectedKeys="persist.selected_name"
+                :openKeys="persist.open_keys"
+            >
                 <template v-for="item in abyss.stack" :key="item.name">
                     <a-menu-item
                         v-if="!item.children"
                         :key="item.name"
-                        selectedKeys="persist.selected_name"
-                        openKeys="persist.open_keys"
                         @click="handleMenu(item.name, item.name)"
                     >{{item.name}}</a-menu-item>
 
@@ -40,6 +42,7 @@ import tools from '@/utils/tools'
 const abyss = abyssPinia()
 const persist = persistPinia()
 
+console.log(persist.open_keys)
 const reload = inject('reload')
 
 // click menu
@@ -50,7 +53,7 @@ const handleMenu = (name, pname) => {
     persist.show_menu = false
 
     // 跳转到指定name的锚点
-    tools.handleScroll(persist.selected_name)
+    tools.handleScroll(name)
 }
 </script>
 
