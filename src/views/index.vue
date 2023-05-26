@@ -89,41 +89,6 @@
             </a-col>
         </a-row>
         <a-back-top />
-
-        <a-drawer
-            title="Abyss Diuu"
-            placement="left"
-            :closable="true"
-            :visible="show_menu"
-            width="200px"
-            class="drawer"
-            @close="handleShowMenu"
-        >
-            <a-layout-sider class="sider" width="100%">
-                <a-menu
-                    v-model:selectedKeys="selected_name"
-                    v-model:openKeys="open_keys"
-                    mode="inline"
-                >
-                    <template v-for="item in abyss.stack" :key="item.name">
-                        <a-menu-item
-                            v-if="!item.children"
-                            :key="item.name"
-                            @click="handleMenu(item.name, item.name)"
-                        >{{item.name}}</a-menu-item>
-
-                        <a-sub-menu v-if="item.children" :key="item.name">
-                            <template #title>{{item.name}}</template>
-                            <a-menu-item
-                                v-for="sub_item in item.children"
-                                :key="sub_item.name"
-                                @click="handleMenu(sub_item.name, item.name)"
-                            >{{sub_item.name}}</a-menu-item>
-                        </a-sub-menu>
-                    </template>
-                </a-menu>
-            </a-layout-sider>
-        </a-drawer>
     </a-layout>
 </template>
 
@@ -139,60 +104,26 @@ import {
 import VHeader from '@/components/header.vue'
 import VAside from '@/components/aside.vue'
 
-import logo from '@/assets/logo.png'
+import tools from '@/utils/tools'
 
 import { abyssPinia } from '@/pinia/abyss'
 import { persistPinia } from '@/pinia/persist'
+
+import logo from '@/assets/logo.png'
 
 const abyss = abyssPinia()
 const persist = persistPinia()
 
 const reload = inject('reload')
 
-const selected_name = ref([])
-const open_keys = ref([])
-
-// click menu
-const handleMenu = (name, pname) => {
-    persist.selected_name = name
-    persist.open_keys = pname
-
-    selected_name.value = [name]
-    open_keys.value = [pname]
-
-    // 跳转到指定name的锚点
-    const el = document.getElementById(name)
-    if (el) {
-        el.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'center',
-        })
-    }
-}
-
 nextTick(async () => {
     await abyss.get_stack_list()
-    handleMenu(persist.selected_name, persist.open_keys)
+    tools.handleScroll(persist.selected_name, persist.open_keys)
 })
 
 // go url
 const handleHerf = (url) => {
     window.open(url, '_blank')
-}
-
-const show_menu = ref(false)
-const handleShowMenu = () => {
-    show_menu.value = !show_menu.value
-}
-
-const spin = ref(false)
-const handleReload = () => {
-    spin.value = true
-    setTimeout(() => {
-        spin.value = false
-        reload()
-    }, 1000)
 }
 
 const handleTargetGithub = () => {

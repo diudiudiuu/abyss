@@ -13,6 +13,18 @@
                 </a-col>
             </a-row>
         </a-layout-header>
+
+        <a-drawer
+            title="Abyss Diuu"
+            placement="left"
+            :closable="true"
+            :visible="show_menu"
+            width="200px"
+            class="drawer"
+            @close="handleShowMenu"
+        >
+            <v-aside></v-aside>
+        </a-drawer>
     </a-layout>
 </template>
 <script setup>
@@ -23,6 +35,9 @@ import {
     GithubOutlined,
 } from '@ant-design/icons-vue'
 
+// 导入自定义组件
+import VAside from '@/components/aside.vue'
+
 import { abyssPinia } from '@/pinia/abyss'
 import { persistPinia } from '@/pinia/persist'
 
@@ -31,6 +46,7 @@ const persist = persistPinia()
 
 const reload = inject('reload')
 
+const show_menu = ref(false)
 const handleShowMenu = () => {
     show_menu.value = !show_menu.value
 }
