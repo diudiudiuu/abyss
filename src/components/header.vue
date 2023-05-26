@@ -8,7 +8,7 @@
                 </a-col>
                 <!-- 操作 -->
                 <a-col flex="1" class="header-menu">
-                    <reload-outlined class="icon" @click="handleReload" :spin="spin" />
+                    <reload-outlined class="icon" @click="handleReload" :spin="abyss.spining" />
                     <github-outlined class="icon" @click="handleTargetGithub" />
                 </a-col>
             </a-row>
@@ -50,13 +50,9 @@ const handleShowMenu = () => {
     persist.show_menu = !persist.show_menu
 }
 
-const spin = ref(false)
 const handleReload = () => {
-    spin.value = true
-    setTimeout(() => {
-        spin.value = false
-        reload()
-    }, 1000)
+    // abyss.spining = true
+    reload()
 }
 
 const handleTargetGithub = () => {
