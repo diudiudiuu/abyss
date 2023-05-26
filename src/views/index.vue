@@ -82,9 +82,12 @@ const reload = inject('reload')
 
 nextTick(async () => {
     abyss.spining = true
+    // 清空 abyss.stack
     await abyss.get_stack_list()
-    abyss.spining = false
-    tools.handleScroll(persist.selected_name, persist.open_keys)
+    setTimeout(() => {
+        abyss.spining = false
+        tools.handleScroll(persist.selected_name, persist.open_keys)
+    }, 600)
 })
 
 // go url

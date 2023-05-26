@@ -22,6 +22,6 @@ export const abyssPinia = defineStore({
             }).catch(() => {
 
             })
-        }
+        },
     },
 })
