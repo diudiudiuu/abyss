@@ -10,8 +10,8 @@
                     <a-menu-item
                         v-if="!item.children"
                         :key="item.name"
-                        :selectedKeys="[persist.selected_name]"
-                        :openKeys="[persist.open_keys]"
+                        selectedKeys="persist.selected_name"
+                        openKeys="persist.open_keys"
                         @click="handleMenu(item.name, item.name)"
                     >{{item.name}}</a-menu-item>
 
@@ -44,10 +44,10 @@ const reload = inject('reload')
 
 // click menu
 const handleMenu = (name, pname) => {
-    persist.selected_name = name
-    persist.open_keys = pname
+    persist.selected_name = [name]
+    persist.open_keys = [pname]
 
-    persist.show_menu = !persist.show_menu
+    persist.show_menu = false
 
     // 跳转到指定name的锚点
     tools.handleScroll(persist.selected_name)

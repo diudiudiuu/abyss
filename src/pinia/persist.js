@@ -9,8 +9,8 @@ import { defineStore } from 'pinia'
 export const persistPinia = defineStore({
   id: 'persist',
   state: () => ({
-    'selected_name': '常用推荐',
-    'open_keys': '常用推荐'
+    'selected_name': ['常用推荐'],
+    'open_keys': ['常用推荐']
   }),
   getters: {
   },
