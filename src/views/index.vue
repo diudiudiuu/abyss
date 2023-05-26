@@ -33,24 +33,7 @@
             </a-col>
             <a-col flex="1">
                 <a-layout class="contain">
-                    <a-layout-header class="header">
-                        <a-row type="flex" justify="space-between">
-                            <!-- 菜单按钮 -->
-                            <a-col flex="100px">
-                                <unordered-list-outlined
-                                    v-if="!show_menu"
-                                    class="icon"
-                                    @click="handleShowMenu"
-                                />
-                                <more-outlined v-else class="icon" @click="handleShowMenu" />
-                            </a-col>
-                            <!-- 操作 -->
-                            <a-col flex="1" class="header-menu">
-                                <reload-outlined class="icon" @click="handleReload" :spin="spin" />
-                                <github-outlined class="icon" @click="handleTargetGithub" />
-                            </a-col>
-                        </a-row>
-                    </a-layout-header>
+                    <v-header></v-header>
                     <a-layout-content class="content">
                         <template v-for="item in abyss.stack" :key="item.name">
                             <template v-if="!item.children && item.web">
@@ -175,10 +158,12 @@
 import { ref, nextTick, inject } from 'vue'
 import {
     UnorderedListOutlined,
-    MoreOutlined,
     ReloadOutlined,
     GithubOutlined,
 } from '@ant-design/icons-vue'
+
+// 导入自定义组件
+import VHeader from '@/components/header.vue'
 
 import logo from '@/assets/logo.png'
 
@@ -201,7 +186,6 @@ const handleMenu = (name, pname) => {
     selected_name.value = [name]
     open_keys.value = [pname]
 
-    show_menu.value = false
     // 跳转到指定name的锚点
     const el = document.getElementById(name)
     if (el) {
