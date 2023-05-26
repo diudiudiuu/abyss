@@ -51,7 +51,6 @@ const handleShowMenu = () => {
 }
 
 const handleReload = () => {
-    // abyss.spining = true
     reload()
 }
 
