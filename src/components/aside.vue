@@ -10,6 +10,8 @@
                     <a-menu-item
                         v-if="!item.children"
                         :key="item.name"
+                        :selectedKeys="[persist.selected_name]"
+                        :openKeys="[persist.open_keys]"
                         @click="handleMenu(item.name, item.name)"
                     >{{item.name}}</a-menu-item>
 
@@ -33,6 +35,8 @@ import logo from '@/assets/logo.png'
 import { abyssPinia } from '@/pinia/abyss'
 import { persistPinia } from '@/pinia/persist'
 
+import tools from '@/utils/tools'
+
 const abyss = abyssPinia()
 const persist = persistPinia()
 
@@ -40,21 +44,13 @@ const reload = inject('reload')
 
 // click menu
 const handleMenu = (name, pname) => {
-    // persist.selected_name = name
-    // persist.open_keys = pname
+    persist.selected_name = name
+    persist.open_keys = pname
 
-    // selected_name.value = [name]
-    // open_keys.value = [pname]
+    persist.show_menu = !persist.show_menu
 
     // 跳转到指定name的锚点
-    const el = document.getElementById(name)
-    if (el) {
-        el.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'center',
-        })
-    }
+    tools.handleScroll(persist.selected_name)
 }
 </script>
 

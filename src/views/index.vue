@@ -109,8 +109,6 @@ import tools from '@/utils/tools'
 import { abyssPinia } from '@/pinia/abyss'
 import { persistPinia } from '@/pinia/persist'
 
-import logo from '@/assets/logo.png'
-
 const abyss = abyssPinia()
 const persist = persistPinia()
 

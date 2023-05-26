@@ -9,6 +9,7 @@ export const abyssPinia = defineStore({
     id: 'abyss',
     state: () => ({
         stack: [],
+        show_menu: false,
     }),
     getters: {
     },

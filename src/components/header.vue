@@ -18,7 +18,7 @@
             title="Abyss Diuu"
             placement="left"
             :closable="true"
-            :visible="show_menu"
+            :visible="persist.show_menu"
             width="200px"
             class="drawer"
             @close="handleShowMenu"
@@ -46,9 +46,8 @@ const persist = persistPinia()
 
 const reload = inject('reload')
 
-const show_menu = ref(false)
 const handleShowMenu = () => {
-    show_menu.value = !show_menu.value
+    persist.show_menu = !persist.show_menu
 }
 
 const spin = ref(false)
