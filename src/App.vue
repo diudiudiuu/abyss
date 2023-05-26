@@ -4,9 +4,9 @@
 
 <script setup>
 import { ref, nextTick, provide, onMounted } from 'vue'
-import { useStorageStore } from '@/pinia/storage'
+import { persistPinia } from '@/pinia/persist'
 
-const storage = useStorageStore()
+const persist = persistPinia()
 onMounted(() => {
     document.title = 'Abyss Diuu'
 })
@@ -16,12 +16,12 @@ const setMetaTitle = (title) => {
 provide('setMetaTitle', setMetaTitle)
 
 if (sessionStorage.getItem('temporary')) {
-    storage.$state = JSON.parse(sessionStorage.getItem('temporary'))
+    persist.$state = JSON.parse(sessionStorage.getItem('temporary'))
     //删除
     sessionStorage.removeItem('temporary')
 }
 window.addEventListener('pagehide', () => {
-    sessionStorage.setItem('temporary', JSON.stringify(storage.$state))
+    sessionStorage.setItem('temporary', JSON.stringify(persist.$state))
 })
 
 // 刷新页面

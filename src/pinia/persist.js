@@ -6,8 +6,8 @@ import { defineStore } from 'pinia'
  * 注意部分数据初始值需要与db常量保持一致
  */
 
-export const useStorageStore = defineStore({
-  id: 'storage',
+export const persistPinia = defineStore({
+  id: 'persist',
   state: () => ({
     'selected_name': '常用推荐',
     'open_keys': '常用推荐'

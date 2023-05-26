@@ -11,6 +11,7 @@ export default defineConfig(({ command, mode }) => {
 	// 根据当前工作目录中的 `mode` 加载 .env 文件
 	const env = loadEnv(mode, process.cwd())
 
+
 	const {
 		VITE_BASE_URL,
 	} = env
@@ -51,7 +52,7 @@ export default defineConfig(({ command, mode }) => {
 		},
 		server: {
 			host: 'localhost', // 默认是 localhost
-			port: '8000', // 默认是 3000 端口
+			port: '8888',
 			cors: true,
 			open: true,
 			hmr: {
@@ -60,6 +61,7 @@ export default defineConfig(({ command, mode }) => {
 			proxy: {
 				[VITE_BASE_URL]: {
 					target: VITE_BASE_URL, //代理接口
+					changeOrigin: true,
 					rewrite: (path) => path.replace(new RegExp(VITE_BASE_URL, "g"), "")
 				}
 			}

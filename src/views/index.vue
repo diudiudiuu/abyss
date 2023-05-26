@@ -79,7 +79,7 @@
                                             >
                                                 <a-card-meta :title="site.title">
                                                     <template #avatar>
-                                                        <a-avatar :src="getLogoUrl(site.logo)" />
+                                                        <a-avatar :src="site.logo" />
                                                     </template>
 
                                                     <template #description>{{site.desc}}</template>
@@ -117,7 +117,7 @@
                                                 >
                                                     <a-card-meta :title="site.title">
                                                         <template #avatar>
-                                                            <a-avatar :src="getLogoUrl(site.logo)" />
+                                                            <a-avatar :src="site.logo" />
                                                         </template>
                                                         <template #description>{{site.desc}}</template>
                                                     </a-card-meta>
@@ -172,7 +172,7 @@
 </template>
 
 <script setup >
-import { ref, onMounted, nextTick, inject } from 'vue'
+import { ref, nextTick, inject } from 'vue'
 import {
     UnorderedListOutlined,
     MoreOutlined,
@@ -182,11 +182,11 @@ import {
 
 import logo from '@/assets/logo.png'
 
-import { useAbyssStore } from '@/pinia/abyss'
-import { useStorageStore } from '@/pinia/storage'
+import { abyssPinia } from '@/pinia/abyss'
+import { persistPinia } from '@/pinia/persist'
 
-const abyss = useAbyssStore()
-const storage = useStorageStore()
+const abyss = abyssPinia()
+const persist = persistPinia()
 
 const reload = inject('reload')
 
@@ -195,8 +195,8 @@ const open_keys = ref([])
 
 // click menu
 const handleMenu = (name, pname) => {
-    storage.selected_name = name
-    storage.open_keys = pname
+    persist.selected_name = name
+    persist.open_keys = pname
 
     selected_name.value = [name]
     open_keys.value = [pname]
@@ -212,17 +212,11 @@ const handleMenu = (name, pname) => {
         })
     }
 }
-onMounted(async () => {
-    await nextTick()
-    handleMenu(storage.selected_name, storage.open_keys)
-})
 
-// get logo url
-const getLogoUrl = (logo) => {
-    const url = new URL(`../${logo}`, import.meta.url)
-    // 转为string
-    return url.toString()
-}
+nextTick(async () => {
+    await abyss.get_stack_list()
+    handleMenu(persist.selected_name, persist.open_keys)
+})
 
 // go url
 const handleHerf = (url) => {
