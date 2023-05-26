@@ -27,7 +27,7 @@
         </a-drawer>
     </a-layout>
 </template>
-<script setup>
+<script setup name="header">
 import { ref, inject } from 'vue'
 import {
     UnorderedListOutlined,

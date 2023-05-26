@@ -22,7 +22,7 @@
     </a-layout>
 </template>
 
-<script setup >
+<script setup name="layout">
 import { ref, nextTick, inject } from 'vue'
 
 // 导入自定义组件

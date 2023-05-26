@@ -28,7 +28,7 @@
         </a-layout-sider>
     </a-layout>
 </template>
-<script setup>
+<script setup name="aside">
 import { ref, inject } from 'vue'
 import logo from '@/assets/logo.png'
 

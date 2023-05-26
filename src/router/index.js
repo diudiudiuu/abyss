@@ -7,9 +7,6 @@ const routes = [
 			{
 				path: "/",
 				name: "/",
-				meta: {
-					auth: false,
-				},
 				component: () => import(/* webpackChunkName: "index" */ "@/views/index.vue")
 			},
 		]

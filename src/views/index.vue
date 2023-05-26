@@ -67,7 +67,7 @@
     </div>
 </template>
 
-<script setup >
+<script setup name="index">
 import { ref, nextTick, inject } from 'vue'
 
 import tools from '@/utils/tools'
