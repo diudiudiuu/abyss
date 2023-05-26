@@ -13,6 +13,11 @@
                 </a-layout>
             </a-col>
         </a-row>
+
+        <div class="spining" v-if="abyss.spining">
+            <a-spin></a-spin>
+        </div>
+
         <a-back-top />
     </a-layout>
 </template>
@@ -42,19 +47,25 @@ const reload = inject('reload')
         .content {
             margin-top: 64px;
             padding: 10px;
-            .site {
-                padding-bottom: 30px;
-                .title {
-                    scroll-margin: 64px;
-                }
-                .item-row {
-                    padding: 10px;
-                    .item-col {
-                        padding: 5px;
-                    }
-                }
-            }
         }
+    }
+
+    .spining {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        z-index: 1000000000;
+        text-align: center;
+        // 上下居中
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        background: rgba(0, 0, 0, 0.15);
     }
 }
 </style>

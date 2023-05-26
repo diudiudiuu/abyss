@@ -81,7 +81,9 @@ const persist = persistPinia()
 const reload = inject('reload')
 
 nextTick(async () => {
+    abyss.spining = true
     await abyss.get_stack_list()
+    abyss.spining = false
     tools.handleScroll(persist.selected_name, persist.open_keys)
 })
 
@@ -91,4 +93,18 @@ const handleHerf = (url) => {
 }
 </script>
 <style lang="less" scoped>
+.site-list {
+    .site {
+        padding-bottom: 30px;
+        .title {
+            scroll-margin: 64px;
+        }
+        .item-row {
+            padding: 10px;
+            .item-col {
+                padding: 5px;
+            }
+        }
+    }
+}
 </style>
