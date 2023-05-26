@@ -58,4 +58,29 @@ const handleMenu = (name, pname) => {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.sider {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    z-index: 2;
+    background-color: #fff;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    .logo {
+        line-height: 64px;
+        text-align: center;
+
+        padding-left: 24px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .project-name {
+            margin-left: 10px;
+            color: #000000d9;
+            font-size: 20px;
+        }
+    }
+}
+</style>

@@ -201,51 +201,8 @@ const handleTargetGithub = () => {
 </script>
 <style lang="less" scoped>
 .abyss {
-    .sider {
-        overflow-x: hidden;
-        overflow-y: auto;
-        position: fixed;
-        z-index: 2;
-        background-color: #fff;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        .logo {
-            line-height: 64px;
-            text-align: center;
-
-            padding-left: 24px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            .project-name {
-                margin-left: 10px;
-                color: #000000d9;
-                font-size: 20px;
-            }
-        }
-    }
-
     .contain {
         width: 100%;
-        .header {
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            width: 100%;
-            background-color: #fff;
-            padding: 0 20px;
-            .icon {
-                font-size: 22px;
-            }
-            .header-menu {
-                text-align: right;
-                .icon {
-                    margin-right: 15px;
-                    font-size: 18px;
-                }
-            }
-        }
 
         .content {
             margin-top: 64px;
