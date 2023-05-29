@@ -11,6 +11,10 @@
 [![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
+## 项目展示
+
+- 设计师导航 <https://abyss.diudiuu.com>
+- chatgpt导航 <https://chatgpt.diudiuu.com>
 
 ## 框架
 
